@@ -2,10 +2,15 @@ const { gql } = require('apollo-server-express');
 
 // Construct a schema, using GraphQL's schema language
 module.exports = gql`
+    # Custom data type
+    scalar DateTime
+
     type Note {
         id: ID!
         content: String!
         author: String!
+        createdAt: DateTime!
+        updatedAt: DateTime!
     }
 
     type Query {
@@ -16,5 +21,9 @@ module.exports = gql`
 
     type Mutation {
         newNote(content: String!): Note!
+        updateNote(id: ID!, content: String!): Note!
+        deleteNote(id: ID!): Boolean!
     }
+
+
 `;
